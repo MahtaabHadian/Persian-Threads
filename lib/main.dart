@@ -488,21 +488,7 @@ class _PostCardsState extends State<PostCards> {
                     color: Colors.redAccent,
                   ),
                 ),
-                IconButton(
-                  onPressed: () {
-                  },
-                  icon: const Icon(Icons.comment_outlined, color: Colors.white),
-                ),
-                IconButton(
-                  onPressed: () {
-                  },
-                  icon: const Icon(Icons.autorenew, color: Colors.white),
-                ),
-                IconButton(
-                  onPressed: () {
-                  },
-                  icon: const Icon(Icons.send, color: Colors.white),
-                ),
+
               ],
             ),
 
