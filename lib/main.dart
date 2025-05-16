@@ -29,8 +29,10 @@ class MyApp extends StatelessWidget {
                   time: '17:07',
                   postText:
                   'This portfolio is a collection of my digital and conceptual artworks, showcasing a blend of imagination, cinematic atmospheres, and visual storytelling.',
-                  imageUrl: 'assets/img/image.png',
-                  profilePicUrl: 'assets/img/pfp.png',
+                  imageUrl:
+                  'https://a.storyblok.com/f/178900/800x420/d8889e2cbf/the-guy-she-was-interested-in-wasnt-a-guy-at-all.jpg', // Replace with a real URL
+                  profilePicUrl:
+                  'https://i.redd.it/5pi46xym7d281.jpg', // Replace with a real URL
                   emojis: [
                     EmojiBubble(emoji: '😊'),
                     EmojiBubble(emoji: '😍'),
@@ -51,9 +53,9 @@ class MyApp extends StatelessWidget {
                 PostCards(
                   username: 'Mahtaab',
                   time: '17:07',
-                  postText:
-                  'This is a text-only post, without any image or voice.',
-                  profilePicUrl: 'assets/img/pfp.png',
+                  postText: 'This is a text-only post, without any image or voice.',
+                  profilePicUrl:
+                  'https://i.redd.it/5pi46xym7d281.jpg', // Replace with a real URL
                   emojis: [
                     EmojiBubble(emoji: '😊'),
                     EmojiBubble(emoji: '😍'),
@@ -75,7 +77,8 @@ class MyApp extends StatelessWidget {
                   username: 'Mahtaab',
                   time: '17:07',
                   postText: 'This should be a post with voice',
-                  profilePicUrl: 'assets/img/pfp.png',
+                  profilePicUrl:
+                  'https://i.redd.it/5pi46xym7d281.jpg', // Replace with a real URL
                   emojis: [
                     EmojiBubble(emoji: '😊'),
                     EmojiBubble(emoji: '😍'),
@@ -96,8 +99,10 @@ class MyApp extends StatelessWidget {
                   username: 'Mahtaab',
                   time: '17:10',
                   postText: 'I WILL TATTOO THIS CLIP!',
-                  videoUrl: 'assets/videos/sample.mp4',
-                  profilePicUrl: 'assets/img/pfp.png',
+                  videoUrl:
+                  'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4', // Replace with a real URL
+                  profilePicUrl:
+                  'https://i.redd.it/5pi46xym7d281.jpg', // Replace with a real URL
                   emojis: [
                     EmojiBubble(emoji: '😊'),
                     EmojiBubble(emoji: '😍'),
@@ -169,7 +174,7 @@ class _PostCardsState extends State<PostCards> {
   void initState() {
     super.initState();
     if (widget.videoUrl != null) {
-      _videoController = VideoPlayerController.asset(widget.videoUrl!)
+      _videoController = VideoPlayerController.networkUrl(Uri.parse(widget.videoUrl!))
         ..initialize().then((_) {
           setState(() {});
         })
@@ -254,7 +259,7 @@ class _PostCardsState extends State<PostCards> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CircleAvatar(
-                  backgroundImage: AssetImage(widget.profilePicUrl),
+                  backgroundImage: NetworkImage(widget.profilePicUrl),
                   radius: 32,
                 ),
                 const SizedBox(width: 16),
@@ -315,7 +320,24 @@ class _PostCardsState extends State<PostCards> {
               const SizedBox(height: 16),
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: Image.asset(widget.imageUrl!),
+                child: Image.network(
+                  widget.imageUrl!,
+                  loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                    if (loadingProgress == null) {
+                      return child;
+                    }
+                    return Center(
+                      child: CircularProgressIndicator(
+                        value: loadingProgress.expectedTotalBytes != null
+                            ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
+                            : null,
+                      ),
+                    );
+                  },
+                  errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                    return const Text('Failed to load image');
+                  },
+                ),
               ),
             ],
 
@@ -514,7 +536,7 @@ class _FullScreenVideoPageState extends State<FullScreenVideoPage> {
   @override
   void initState() {
     super.initState();
-    _fullScreenVideoController = VideoPlayerController.asset(widget.videoUrl)
+    _fullScreenVideoController = VideoPlayerController.networkUrl(Uri.parse(widget.videoUrl))
       ..initialize().then((_) {
         setState(() {});
         if (widget.initialPosition != null) {
@@ -720,4 +742,3 @@ class _FullScreenVideoPageState extends State<FullScreenVideoPage> {
     );
   }
 }
-
