@@ -35,15 +35,7 @@ class MyApp extends StatelessWidget {
                   'https://a.storyblok.com/f/178900/800x420/d8889e2cbf/the-guy-she-was-interested-in-wasnt-a-guy-at-all.jpg', // Replace with a real URL
                   profilePicUrl:
                   'https://i.redd.it/5pi46xym7d281.jpg',
-                  emojis: [
-                    EmojiBubble(emoji: '😊'),
-                    EmojiBubble(emoji: '😍'),
-                    EmojiBubble(emoji: '👍'),
-                    EmojiBubble(emoji: '😂'),
-                    EmojiBubble(emoji: '🌟'),
-                    EmojiBubble(emoji: '🔥'),
-                    EmojiBubble(emoji: '💬'),
-                  ], mypost: true,
+                   mypost: true,
                 ),
                 SizedBox(height: 10),
                 Container(
@@ -58,15 +50,7 @@ class MyApp extends StatelessWidget {
                   postText: 'This is a text-only post, without any image or voice.',
                   profilePicUrl:
                   'https://i.redd.it/5pi46xym7d281.jpg',
-                  emojis: [
-                    EmojiBubble(emoji: '😊'),
-                    EmojiBubble(emoji: '😍'),
-                    EmojiBubble(emoji: '👍'),
-                    EmojiBubble(emoji: '😂'),
-                    EmojiBubble(emoji: '🌟'),
-                    EmojiBubble(emoji: '🔥'),
-                    EmojiBubble(emoji: '💬'),
-                  ], mypost: false,
+                  mypost: false,
                 ),
                 SizedBox(height: 10),
                 Container(
@@ -81,15 +65,7 @@ class MyApp extends StatelessWidget {
                   postText: 'This should be a post with voice',
                   profilePicUrl:
                   'https://i.redd.it/5pi46xym7d281.jpg',
-                  emojis: [
-                    EmojiBubble(emoji: '😊'),
-                    EmojiBubble(emoji: '😍'),
-                    EmojiBubble(emoji: '👍'),
-                    EmojiBubble(emoji: '😂'),
-                    EmojiBubble(emoji: '🌟'),
-                    EmojiBubble(emoji: '🔥'),
-                    EmojiBubble(emoji: '💬'),
-                  ],mypost: false,
+                  mypost: false,
                 ),
                 Container(
                   width: double.infinity,
@@ -105,15 +81,7 @@ class MyApp extends StatelessWidget {
                   'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4', // Replace with a real URL
                   profilePicUrl:
                   'https://i.redd.it/5pi46xym7d281.jpg',
-                  emojis: [
-                    EmojiBubble(emoji: '😊'),
-                    EmojiBubble(emoji: '😍'),
-                    EmojiBubble(emoji: '👍'),
-                    EmojiBubble(emoji: '😂'),
-                    EmojiBubble(emoji: '🌟'),
-                    EmojiBubble(emoji: '🔥'),
-                    EmojiBubble(emoji: '💬'),
-                  ],mypost: false,
+                  mypost: false,
                 ),
               ],
             ),
@@ -124,20 +92,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class EmojiBubble extends StatelessWidget {
-  final String emoji;
 
-  const EmojiBubble({super.key, required this.emoji});
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 17,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(100),
-        color: Colors.white
-      ),
-    );
-  }
-}
 

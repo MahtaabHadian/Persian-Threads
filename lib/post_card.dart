@@ -14,7 +14,6 @@ class PostCards extends StatefulWidget {
   final String? voiceLabel;
   final String? videoUrl;
 
-  final List<Widget> emojis;
 
   const PostCards({
     super.key,
@@ -26,7 +25,6 @@ class PostCards extends StatefulWidget {
     this.imageUrl,
     this.voiceLabel,
     this.videoUrl,
-    this.emojis = const [],
   });
 
   @override
@@ -267,7 +265,6 @@ class _PostCardsState extends State<PostCards> {
               ),
             ],
 
-            if (widget.emojis.isNotEmpty) ...[
               const SizedBox(height: 23),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -311,15 +308,23 @@ class _PostCardsState extends State<PostCards> {
                               children: [
                                 SingleChildScrollView(
                                   scrollDirection: Axis.horizontal,
-                                  child: Row(
-                                    children: widget.emojis.map((emoji) {
-                                      return Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 4, vertical: 7),
-                                        child: emoji,
-                                      );
-                                    }).toList(),
-                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(7.0),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: List.generate(7, (index) {
+                                        return Container(
+                                          width: 15,
+                                          height: 15,
+                                          margin: const EdgeInsets.symmetric(horizontal: 4),
+                                          decoration: const BoxDecoration(
+                                            color: Colors.white,
+                                            shape: BoxShape.circle,
+                                          ),
+                                        );
+                                      }),
+                                    ),
+                                  )
                                 ),
                                 Positioned(
                                   right: 0,
@@ -367,7 +372,7 @@ class _PostCardsState extends State<PostCards> {
                   ): const SizedBox.shrink(),
                 ],
               ),
-            ],
+
 
             const SizedBox(height: 12),
             Row(
